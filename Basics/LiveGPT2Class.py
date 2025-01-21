@@ -75,10 +75,10 @@ class LiveClass:
         response = response.strip()
 
         # Фильтр недопустимых слов
-        banned_words = ["рот", "ругательство", "нецензурное"]
-        for word in banned_words:
-            if word in response.lower():
-                return "Извините, я не могу ответить на этот запрос."
+     #   banned_words = ["рот", "ругательство", "нецензурное"]
+      #  for word in banned_words:
+       #     if word in response.lower():
+        #        return "Извините, я не могу ответить на этот запрос."
 
         # Если ответ слишком короткий, добавляем стандартный
         if len(response.split()) < 3:
