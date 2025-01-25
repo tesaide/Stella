@@ -1,5 +1,5 @@
 import cv2
-import mediapie as mp
+import mediapie as mp # error 
 import time
 
 cap =cv2.VideoCapture(0)
@@ -41,3 +41,5 @@ while True:
 
     cap.release()
     cv2.destroyAllWindows()
+
+    
