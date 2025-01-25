@@ -7,3 +7,5 @@ python -m pip install --upgrade pip
 pip install transformers
 pip install SpeechRecognition
 pip install pyaudio
+pip install opencv-python
+pip install mediapipe
