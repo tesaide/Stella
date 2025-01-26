@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, Bot
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+import subprocess
 
 # Загружаем переменные окружения из .env файла
 load_dotenv()
@@ -38,7 +39,8 @@ it_jokes = load_jokes(file_path)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [KeyboardButton("👋 Привет"), KeyboardButton("❓ Помощь")],
-        [KeyboardButton("🎮 Играть в Камень-Ножницы-Бумага"), KeyboardButton("🃏 Шутки")]
+        [KeyboardButton("🎮 Играть в Камень-Ножницы-Бумага"), KeyboardButton("🃏 Шутки")],
+        [KeyboardButton("🎮 Запустить Dota 2")]
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
@@ -103,7 +105,8 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif text == "🔙 Вернуться в меню":
         keyboard = [
             [KeyboardButton("👋 Привет"), KeyboardButton("❓ Помощь")],
-            [KeyboardButton("🎮 Играть в Камень-Ножницы-Бумага"), KeyboardButton("🃏 Шутки")]
+            [KeyboardButton("🎮 Играть в Камень-Ножницы-Бумага"), KeyboardButton("🃏 Шутки")],
+            [KeyboardButton("🎮 Запустить Dota 2")]
         ]
         reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
@@ -111,6 +114,14 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"Вы вернулись в главное меню, {update.effective_user.first_name}!",
             reply_markup=reply_markup
         )
+
+    elif text == "🎮 Запустить Dota 2":
+        try:
+            # Укажите путь к Steam и ID игры Dota 2
+            subprocess.Popen(r'Z:\SteamLibrary\steamapps\common\dota 2 beta\game\bin\win64\dota2.exe')
+            await update.message.reply_text("Dota 2 запущена! 🎮")
+        except Exception as e:
+            await update.message.reply_text(f"Ошибка при запуске Dota 2: {e}")
 
     else:
         await update.message.reply_text("Я вас не понимаю. Воспользуйтесь кнопками меню.")
